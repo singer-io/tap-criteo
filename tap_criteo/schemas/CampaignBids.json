@@ -1,0 +1,63 @@
+{
+    "type:": ["object"],
+    "additionalProperties": false,
+    "properties": {
+        "campaignId": {
+            "type": ["null", "integer"]
+        },
+        "campaignName": {
+            "type": ["null", "string"]
+        },
+        "campaignBid": {
+            "type": ["null", "object"],
+            "properties": {
+                "bidValue": {
+                    "type": ["null", "number"]
+                },
+                "bidCurrency": {
+                    "type": ["null", "string"]
+                },
+                "bidType": {
+                    "type": ["null", "string"]
+                },
+                "bidIsPending": {
+                    "type": ["null", "boolean"]
+                }
+            }
+        },
+        "categories": {
+            "type": ["null", "array"],
+            "items": {
+                "type": ["null", "object"],
+                "properties": {
+                    "categoryHashcode": {
+                        "type": ["null", "integer"]
+                    },
+                    "categoryName": {
+                        "type": ["null", "string"]
+                    },
+                    "categoryBid": {
+                        "type": ["null", "object"],
+                        "properties": {
+                            "bidValue": {
+                                "type": ["null", "number"]
+                            },
+                            "bidCurrency": {
+                                "type": ["null", "string"]
+                            },
+                            "bidType": {
+                                "type": ["null", "string"]
+                            },
+                            "bidIsPending": {
+                                "type": ["null", "boolean"]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "campaignStatus": {
+            "type": ["null", "string"]
+        }
+    }
+}

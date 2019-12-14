@@ -1,0 +1,31 @@
+{
+    "type:": ["null", "object"],
+    "additionalProperties": false,
+    "properties": {
+        "advertiserId": {
+            "type": ["null", "integer"]
+        },
+        "budgetId": {
+            "type": ["null", "integer"]
+        },
+        "budgetName": {
+            "type": ["null", "string"]
+        },
+        "type": {
+            "type": ["null", "string"]
+        },
+        "totalAmount": {
+            "type": ["null", "number"]
+        },
+        "remainingBudget": {
+            "type": ["null", "number"]
+        },
+        "remainingBudgetUpdated": {
+            "type": ["null", "string"],
+            "format": "date-time"
+        },
+        "active": {
+            "type": ["null", "boolean"]
+        }
+    }
+}

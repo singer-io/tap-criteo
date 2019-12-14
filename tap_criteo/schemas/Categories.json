@@ -1,0 +1,56 @@
+{
+    "type:": ["null", "object"],
+    "additionalProperties": false,
+    "properties": {
+        "categoryHashCode": {
+            "type": ["null", "integer"]
+        },
+        "categoryName": {
+            "type": ["null", "string"]
+        },
+        "catalogId": {
+            "type": ["null", "integer"]
+        },
+        "catalogName": {
+            "type": ["null", "integer"]
+        },
+        "advertiserId": {
+            "type": ["null", "integer"]
+        },
+        "advertiserName": {
+            "type": ["null", "string"]
+        },
+        "campaignId": {
+            "type": ["null", "integer"]
+        },
+        "campaignName": {
+            "type": ["null", "string"]
+        },
+        "averagePrice": {
+            "type": ["null", "number"]
+        },
+        "numberOfProducts": {
+            "type": ["null", "integer"]
+        },
+        "categoryBid": {
+            "type": ["null", "object"],
+            "properties": {
+                "bidValue": {
+                    "type": ["null", "float"]
+                },
+                "bidCurrency": {
+                    "type": ["null", "string"]
+                },
+                "bidType": {
+                    "type": ["null", "string"]
+                },
+                "bidIsPending": {
+                    "type": ["null", "boolean"]
+                }
+            }
+        },
+        "enabled": {
+            "type": ["null", "boolean"]
+        }
+    }
+}

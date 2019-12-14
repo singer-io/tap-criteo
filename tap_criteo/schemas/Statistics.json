@@ -1,0 +1,133 @@
+{
+    "type:": ["null", "object"],
+    "additionalProperties": false,
+    "properties": {
+        "AdvertiserId": {
+            "type": ["null", "string"]
+        },
+        "CampaignId": {
+            "type": ["null", "string"]
+        },
+        "Category": {
+            "type": ["null", "string"]
+        },
+        "Year": {
+            "type": ["null", "string"]
+        },
+        "Month": {
+            "type": ["null", "string"]
+        },
+        "Week": {
+            "type": ["null", "string"]
+        },
+        "Day": {
+            "type": ["null", "string"],
+            "format": "date-time"
+        },
+        "Hour": {
+            "type": ["null", "string"]
+        },
+        "Clicks": {
+            "type": ["null", "string"]
+        },
+        "Displays": {
+            "type": ["null", "string"]
+        },
+        "AdvertiserCost": {
+            "type": ["null", "string"]
+        },
+        "SalesPc": {
+            "type": ["null", "string"]
+        },
+        "SameSalesPc": {
+            "type": ["null", "string"]
+        },
+        "SalesPcNd": {
+            "type": ["null", "string"]
+        },
+        "SalesPv": {
+            "type": ["null", "string"]
+        },
+        "SalesPvNd": {
+            "type": ["null", "string"]
+        },
+        "SalesPcPv": {
+            "type": ["null", "string"]
+        },
+        "SalesAllPc": {
+            "type": ["null", "string"]
+        },
+        "RevenueGeneratedPc": {
+            "type": ["null", "string"]
+        },
+        "RevenueGeneratedPv": {
+            "type": ["null", "string"]
+        },
+        "RevenueGeneratedPcPv": {
+            "type": ["null", "string"]
+        },
+        "RevenueGeneratedPcNd": {
+            "type": ["null", "string"]
+        },
+        "RevenueGeneratedPvNd": {
+            "type": ["null", "string"]
+        },
+        "ExposedUsers": {
+            "type": ["null", "string"]
+        },
+        "OverallCompetitionWin": {
+            "type": ["null", "string"]
+        },
+        "Audience": {
+            "type": ["null", "string"]
+        },
+        "Reach": {
+            "type": ["null", "string"]
+        },
+        "AverageCart": {
+            "type": ["null", "string"]
+        },
+        "ClickThroughRate": {
+            "type": ["null", "string"]
+        },
+        "ConversionRate": {
+            "type": ["null", "string"]
+        },
+        "ConversionRatePv": {
+            "type": ["null", "string"]
+        },
+        "ECos": {
+            "type": ["null", "string"]
+        },
+        "ECosPv": {
+            "type": ["null", "string"]
+        },
+        "ECosPcPv": {
+            "type": ["null", "string"]
+        },
+        "CostPerOrder": {
+            "type": ["null", "string"]
+        },
+        "CostPerOrderPv": {
+            "type": ["null", "string"]
+        },
+        "CostPerOrderPcPv": {
+            "type": ["null", "string"]
+        },
+        "ECpc": {
+            "type": ["null", "string"]
+        },
+        "ECpm": {
+            "type": ["null", "string"]
+        },
+        "ReturnOnAdvertisingSpending": {
+            "type": ["null", "string"]
+        },
+        "AdvertiserValue": {
+            "type": ["null", "string"]
+        },
+        "CostOfAdvertiserValue": {
+            "type": ["null", "string"]
+        }
+    }
+}

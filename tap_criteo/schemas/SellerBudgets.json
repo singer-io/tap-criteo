@@ -1,0 +1,41 @@
+{
+    "type:": ["null", "object"],
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": ["null", "integer"]
+        },
+        "seller_id": {
+            "type": ["null", "integer"]
+        },
+        "campaign_ids": {
+            "type": ["null", "array"],
+            "items": {
+                "type": ["null", "integer"]
+            }
+        },
+        "budget_type": {
+            "type": ["null", "string"]
+        },
+        "amount": {
+            "type": ["null", "number"]
+        },
+        "start_date": {
+            "type": ["null", "string"],
+            "format": "date-time"
+        },
+        "end_date": {
+            "type": ["null", "string"],
+            "format": "date-time"
+        },
+        "spend": {
+            "type": ["null", "number"]
+        },
+        "status": {
+            "type": ["null", "string"]
+        },
+        "is_suspended": {
+            "type": ["null", "boolean"]
+        }
+    }
+}
