@@ -1,0 +1,33 @@
+{
+    "type:": ["null", "object"],
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": ["null", "integer"]
+        },
+        "advertiserId": {
+            "type": ["null", "integer"]
+        },
+        "name": {
+            "type": ["null", "string"]
+        },
+        "description": {
+            "type": ["null", "string"]
+        },
+        "created": {
+            "type": ["null", "integer"]
+        },
+        "updated": {
+            "type": ["null", "integer"]
+        },
+        "nbLines": {
+            "type": ["null", "integer"]
+        },
+        "nbLinesEmail": {
+            "type": ["null", "integer"]
+        },
+        "nbMatchesEmail": {
+            "type": ["null", "integer"]
+        }
+    }
+}

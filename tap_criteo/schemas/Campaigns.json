@@ -1,0 +1,50 @@
+{
+    "type:": ["object"],
+    "additionalProperties": false,
+    "properties": {
+        "campaignType": {
+            "type": ["null", "string"]
+        },
+        "advertiserName": {
+            "type": ["null", "string"]
+        },
+        "categories": {
+            "type": ["null", "array"],
+            "items": {
+                "type": ["null", "integer"]
+            }
+        },
+        "budgetId": {
+            "type": ["null", "integer"]
+        },
+        "campaignId": {
+            "type": ["null", "integer"]
+        },
+        "campaignName": {
+            "type": ["null", "string"]
+        },
+        "advertiserId": {
+            "type": ["null", "integer"]
+        },
+        "campaignStatus": {
+            "type": ["null", "string"]
+        },
+        "campaignBid": {
+            "type": ["null", "object"],
+            "properties": {
+                "bidValue": {
+                    "type": ["null", "number"]
+                },
+                "bidCurrency": {
+                    "type": ["null", "string"]
+                },
+                "bidType": {
+                    "type": ["null", "string"]
+                },
+                "bidIsPending": {
+                    "type": ["null", "boolean"]
+                }
+            }
+        }
+    }
+}

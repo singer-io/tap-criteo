@@ -1,0 +1,46 @@
+{
+    "type:": ["null", "object"],
+    "additionalProperties": false,
+    "properties": {
+        "campaignId": {
+            "type": ["null", "string"]
+        },
+        "year": {
+            "type": ["null", "string"]
+        },
+        "month": {
+            "type": ["null", "string"]
+        },
+        "day": {
+            "type": ["null", "string"],
+            "format": "date-time"
+        },
+        "hour": {
+            "type": ["null", "string"]
+        },
+        "impressions": {
+            "type": ["null", "string"]
+        },
+        "clicks": {
+            "type": ["null", "string"]
+        },
+        "saleUnits": {
+            "type": ["null", "string"]
+        },
+        "revenue": {
+            "type": ["null", "string"]
+        },
+        "cr": {
+            "type": ["null", "string"]
+        },
+        "cpo": {
+            "type": ["null", "string"]
+        },
+        "cos": {
+            "type": ["null", "string"]
+        },
+        "roas": {
+            "type": ["null", "string"]
+        }
+    }
+}
