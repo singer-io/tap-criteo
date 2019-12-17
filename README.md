@@ -5,21 +5,21 @@ This is a [Singer](https://singer.io) tap that produces JSON-formatted data foll
 This tap:
 - Pulls raw data from the Criteo Marketing API
 - Extracts the following resources from Criteo for a one or more advertisers:
-  - [Audiences](https://api.criteo.com/marketing/swagger/ui/index#!/Audiences/Audiences_GetAudiences)
-  - [AdvertiserInfo](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2/SellersV2_GetAdvertisers)
-  - [Budgets](https://api.criteo.com/marketing/swagger/ui/index#!/Budgets/Budgets_Get)
-  - [Campaigns](https://api.criteo.com/marketing/swagger/ui/index#!/Campaigns/Campaigns_GetCampaigns)
-  - [CampaignBids](https://api.criteo.com/marketing/swagger/ui/index#!/Campaigns/Campaigns_GetBids)
+  - [Audiences](https://api.criteo.com/marketing/swagger/ui/index#!/Audiences/Audiences_GetAudiences) [TODO]
+  - [AdvertiserInfo](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2/SellersV2_GetAdvertisers) [TODO]
+  - [Budgets](https://api.criteo.com/marketing/swagger/ui/index#!/Budgets/Budgets_Get) [TODO]
+  - [Campaigns](https://api.criteo.com/marketing/swagger/ui/index#!/Campaigns/Campaigns_GetCampaigns) [TODO]
+  - [CampaignBids](https://api.criteo.com/marketing/swagger/ui/index#!/Campaigns/Campaigns_GetBids) [TODO]
   - [CampaignPerformance](https://api.criteo.com/marketing/swagger/ui/index#!/Statistics/Statistics_GetStats)
-  - [CampaignStats](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2Stats/SellersV2Stats_Campaigns)
-  - [Categories](https://api.criteo.com/marketing/swagger/ui/index#!/Categories/Categories_GetCategories)
+  - [CampaignStats](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2Stats/SellersV2Stats_Campaigns) [TODO]
+  - [Categories](https://api.criteo.com/marketing/swagger/ui/index#!/Categories/Categories_GetCategories) [TODO]
   - [FacebookDPA](https://api.criteo.com/marketing/swagger/ui/index#!/Statistics/Statistics_GetStats)
-  - [Portfolio](https://api.criteo.com/marketing/swagger/ui/index#!/Portfolio/Portfolio_GetPortfolio)
-  - [SellerBudgets](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2/SellersV2_GetSellerBudgets)
-  - [SellerCampaigns](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2/SellersV2_GetSellerCampaigns)
-  - [SellerCampaignStats](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2Stats/SellersV2Stats_SellerCampaigns)
-  - [Sellers](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2/SellersV2_GetSellers)
-  - [SellerStats](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2Stats/SellersV2Stats_Sellers)
+  - [Portfolio](https://api.criteo.com/marketing/swagger/ui/index#!/Portfolio/Portfolio_GetPortfolio) [TODO]
+  - [SellerBudgets](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2/SellersV2_GetSellerBudgets) [TODO]
+  - [SellerCampaigns](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2/SellersV2_GetSellerCampaigns) [TODO]
+  - [SellerCampaignStats](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2Stats/SellersV2Stats_SellerCampaigns) [TODO]
+  - [Sellers](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2/SellersV2_GetSellers) [TODO]
+  - [SellerStats](https://api.criteo.com/marketing/swagger/ui/index#!/SellersV2Stats/SellersV2Stats_Sellers) [TODO]
   - [TransactionID](https://api.criteo.com/marketing/swagger/ui/index#!/Statistics/Statistics_GetStats)
 
 
