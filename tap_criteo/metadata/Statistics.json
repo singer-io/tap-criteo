@@ -1,7 +1,7 @@
 [{"metadata": {"inclusion": "available", "currency": "USD", "ignoreXDevice": false}, "breadcrumb": []},
 {"metadata": {"inclusion": "avaliable", "col-name": "Advertiser ID", "behaviour": "dimension"}, "breadcrumb": ["properties", "AdvertiserId"]},
 {"metadata": {"inclusion": "avaliable", "col-name": "Campaign ID", "behaviour": "dimension"}, "breadcrumb": ["properties", "CampaignId"]},
-{"metadata": {"inclusion": "available", "col-name": "Category", "behaviour": "dimension"}, "breadcrumb": ["properties", "Category"]},
+{"metadata": {"inclusion": "available", "col-name": "Category ID", "behaviour": "dimension"}, "breadcrumb": ["properties", "Category"]},
 {"metadata": {"inclusion": "available", "col-name": "Year", "behaviour": "dimension"}, "breadcrumb": ["properties", "Year"]},
 {"metadata": {"inclusion": "available", "col-name": "Month", "behaviour": "dimension"}, "breadcrumb": ["properties", "Month"]},
 {"metadata": {"inclusion": "available", "col-name": "Week", "behaviour": "dimension"}, "breadcrumb": ["properties", "Week"]},
@@ -43,4 +43,5 @@
 {"metadata": {"inclusion": "available", "col-name": "COV", "behaviour": "metric"}, "breadcrumb": ["properties", "CostOfAdvertiserValue"]},
 {"metadata": {"col-name": "Campaign Name", "behaviour": "annotation"}, "breadcrumb": ["properties", "CampaignName"]},
 {"metadata": {"col-name": "Advertiser Name", "behaviour": "annotation"}, "breadcrumb": ["properties", "AdvertiserName"]},
+{"metadata": {"col-name": "Category Name", "behaviour": "annotation"}, "breadcrumb": ["properties", "CategoryName"]},
 {"metadata": {"col-name": "Currency", "behaviour": "annotation"}, "breadcrumb": ["properties", "Currency"]}]

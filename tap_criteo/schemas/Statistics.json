@@ -17,6 +17,9 @@
         "Category": {
             "type": ["null", "string"]
         },
+        "CategoryName": {
+            "type": ["null", "string"]
+        },
         "Year": {
             "type": ["null", "string"]
         },
