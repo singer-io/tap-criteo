@@ -119,12 +119,15 @@ def add_synthetic_keys_to_stream_metadata(stream_metadata):
     )
     return stream_metadata
 
-def parse_csv_stream(csv_stream):
-    # Remove BON
+def parse_csv_stream(mdata, csv_stream):
+    # Remove BOM
     csv_stream = csv_stream.lstrip("\ufeff")
     # Read a single line into a String, and parse the headers as a CSV
     headers = csv.reader(io.StringIO(csv_stream), delimiter=CSV_DELIMITER)
+    # Convert headers to match Schema from metadata
+    header_mapping = {v.get("col-name"): k for k, v in mdata.items()}
     header_array = list(headers)[0]
+    header_array = [header_mapping[header][1] for header in header_array]
 
     # Create another CSV reader for the rest of the data
     csv_reader = csv.DictReader(io.StringIO(csv_stream), fieldnames=header_array, delimiter=CSV_DELIMITER)
@@ -205,7 +208,7 @@ def sync_statistics_for_day(config, state, stream, sdk_client,
     with metrics.http_request_timer(stream.tap_stream_id):
         result = get_statistics_report(sdk_client, stats_query, token=token)
 
-    csv_reader = parse_csv_stream(result)
+    csv_reader = parse_csv_stream(mdata, result)
     with metrics.record_counter(stream.tap_stream_id) as counter:
         time_extracted = utils.now()
 

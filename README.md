@@ -94,7 +94,8 @@ tap-criteo uses some custom metadata keys for some endpoints:
 
 #### Field metadata
 
-* `behaviour` - Either metric or dimension. As defined by Criteo's [documentation](https://support.criteo.com/s/article?article=360001362485-Retrieve-statistics)
+* `col-name` - This is the CSV header that Criteo returns for this piece of data and is used to parse the CSV.
+* `behaviour` - Either metric or dimension. As defined by Criteo's [documentation](https://support.criteo.com/s/article?article=360001362485-Retrieve-statistics). If neither metric or dimension fields are listed as `annotation`, these fields are returned but cannot be specifically requested.
 * `fieldExclusions` - Indicates which other fields may not be selected when this field is selected. If you invoke the tap with selections that violate fieldExclusion rules, the tap will fail.
 
 ### SellersV2Stats (SellerStats, CampaignStats, SellerCampaignStats)

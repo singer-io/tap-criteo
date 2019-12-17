@@ -5,7 +5,13 @@
         "AdvertiserId": {
             "type": ["null", "string"]
         },
+        "AdvertiserName": {
+            "type": ["null", "string"]
+        },
         "CampaignId": {
+            "type": ["null", "string"]
+        },
+        "CampaignName": {
             "type": ["null", "string"]
         },
         "Category": {
@@ -127,6 +133,9 @@
             "type": ["null", "string"]
         },
         "CostOfAdvertiserValue": {
+            "type": ["null", "string"]
+        },
+        "Currency": {
             "type": ["null", "string"]
         }
     }
