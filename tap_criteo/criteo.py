@@ -68,3 +68,23 @@ def get_statistics_report(client, stats_query, token=None):
     stats_query_message = criteo_marketing.StatsQueryMessageEx(**stats_query)
 
     return stats_api.get_stats(token, stats_query_message)
+
+@singer.utils.backoff((ApiException,), exception_is_4xx)
+def get_audiences_endpoint(client, advertiser_id, token=None):
+    token = token or get_auth_token(client)
+    api_instance = criteo_marketing.AudiencesApi(client)
+    return api_instance.get_audiences(token, advertiser_id=advertiser_id)
+
+@singer.utils.backoff((ApiException,), exception_is_4xx)
+def get_sellers_v2_advertisers_endpoint(client, token=None):
+    token = token or get_auth_token(client)
+    api_instance = criteo_marketing.SellersV2Api(client)
+    return api_instance.get_advertisers(token)
+
+@singer.utils.backoff((ApiException,), exception_is_4xx)
+def get_generic_endpoint(client, module, method, advertiser_ids=None, token=None):
+    token = token or get_auth_token(client)
+    api_instance = getattr(criteo_marketing, module)(client)
+    if advertiser_ids:
+        return getattr(api_instance, method)(token, advertiser_ids=advertiser_ids)
+    return getattr(api_instance, method)(token)
