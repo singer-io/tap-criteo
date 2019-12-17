@@ -14,7 +14,10 @@ from tap_criteo.endpoints import (GENERIC_ENDPOINT_MAPPINGS,
                                   STATISTICS_REPORT_TYPES)
 from tap_criteo.criteo import (create_sdk_client,
                                refresh_auth_token,
-                               get_statistics_report)
+                               get_statistics_report,
+                               get_audiences_endpoint,
+                               get_sellers_v2_advertisers_endpoint,
+                               get_generic_endpoint)
 
 
 CSV_DELIMITER = ";"
@@ -72,52 +75,54 @@ def get_fields_to_sync(stream):
 #         return fields_to_sync
 
 def get_field_list(stream):
-    stream.metadata = add_synthetic_keys_to_stream_metadata(stream.metadata)
+    stream = add_synthetic_keys_to_stream_metadata(stream)
     field_list = get_fields_to_sync(stream)
     LOGGER.info("Request fields: %s", field_list)
     # field_list = filter_fields_by_stream_name(stream.tap_stream_id, field_list)
     # LOGGER.info("Filtered fields: %s", field_list)
     return field_list
 
-def add_synthetic_keys_to_stream_schema(stream_schema):
-    stream_schema.properties["_sdc_report_datetime"] = Schema.from_dict(
+def add_synthetic_keys_to_stream_schema(stream):
+    stream.schema.properties["_sdc_report_datetime"] = Schema.from_dict(
         {
             "description": "DateTime of Report Run",
             "type": "string",
             "format" : "date-time"
         }
     )
-    stream_schema.properties["_sdc_report_currency"] = Schema.from_dict(
-        {
-            "description": "Currency of all costs in report",
-            "type": "string",
-        }
-    )
-    stream_schema.properties["_sdc_report_ignore_x_device"] = Schema.from_dict(
-        {
-            "description": "Ignore cross-device data. Also can explicitly set to null for TransactionID ReportType to get all data.",
-            "type": "boolean",
-        }
-    )
-    return stream_schema
+    if stream.tap_stream_id in STATISTICS_REPORT_TYPES:
+        stream.schema.properties["_sdc_report_currency"] = Schema.from_dict(
+            {
+                "description": "Currency of all costs in report",
+                "type": "string",
+            }
+        )
+        stream.schema.properties["_sdc_report_ignore_x_device"] = Schema.from_dict(
+            {
+                "description": "Ignore cross-device data. Also can explicitly set to null for TransactionID ReportType to get all data.",
+                "type": "boolean",
+            }
+        )
+    return stream
 
-def add_synthetic_keys_to_stream_metadata(stream_metadata):
-    stream_metadata.append({
+def add_synthetic_keys_to_stream_metadata(stream):
+    stream.metadata.append({
         "metadata": {"inclusion": "automatic"},
         "breadcrumb": ["properties", "_sdc_report_datetime"]
         }
     )
-    stream_metadata.append({
-        "metadata": {"inclusion": "automatic"},
-        "breadcrumb": ["properties", "_sdc_report_currency"]
-        }
-    )
-    stream_metadata.append({
-        "metadata": {"inclusion": "automatic"},
-        "breadcrumb": ["properties", "_sdc_report_ignore_x_device"]
-        }
-    )
-    return stream_metadata
+    if stream.tap_stream_id in STATISTICS_REPORT_TYPES:
+        stream.metadata.append({
+            "metadata": {"inclusion": "automatic"},
+            "breadcrumb": ["properties", "_sdc_report_currency"]
+            }
+        )
+        stream.metadata.append({
+            "metadata": {"inclusion": "automatic"},
+            "breadcrumb": ["properties", "_sdc_report_ignore_x_device"]
+            }
+        )
+    return stream
 
 def parse_csv_stream(mdata, csv_stream):
     # Remove BOM
@@ -134,11 +139,11 @@ def parse_csv_stream(mdata, csv_stream):
     next(csv_reader, None)  # Skip header row
     return csv_reader
 
-def sync_statistics_report(config, state, stream, sdk_client):
+def sync_statistics_report(config, state, stream, sdk_client, token):
     advertiser_ids = config.get("advertiser_ids", "")
     mdata = metadata.to_map(stream.metadata)
 
-    stream.schema = add_synthetic_keys_to_stream_schema(stream.schema)
+    stream = add_synthetic_keys_to_stream_schema(stream)
 
     field_list = get_field_list(stream)
 
@@ -168,7 +173,6 @@ def sync_statistics_report(config, state, stream, sdk_client):
     if not len(report_metrics) >= 1:
         raise ValueError("%s stream must have at least 1 selected metric" % stream.stream)
 
-    token = None
     while start_date <= get_end_date(config):
         token = refresh_auth_token(sdk_client, token)
         sync_statistics_for_day(config, state, stream, sdk_client, token, start_date, report_metrics, report_dimensions)
@@ -241,19 +245,69 @@ def sync_seller_stats_for_day(config, state, stream, sdk_client,
                               token, start, metrics, report_dimensions):
     pass
 
-def sync_generic_endpoint(config, state, stream, sdk_client):
-    pass
+def convert_keys_snake_to_camel(result_array):
+    result_copy = copy.copy(result_array)
+    result_copy = [{''.join(x.capitalize() or '_' for x in k.split('_')): v
+        for k, v in each.items()} for each in result_copy]
+    return [{k[0].lower() + k[1:]: v for k, v in each.items()} for each in result_copy]
+
+def call_generic_endpoint(stream, sdk_client, module, method, advertiser_ids=None, token=None):
+    with metrics.http_request_timer(stream.tap_stream_id):
+        return get_generic_endpoint(sdk_client, module, method, advertiser_ids=advertiser_ids, token=token)
+
+def sync_generic_endpoint(config, state, stream, sdk_client, token):
+    stream = add_synthetic_keys_to_stream_schema(stream)
+    stream = add_synthetic_keys_to_stream_metadata(stream)
+    mdata = metadata.to_map(stream.metadata)
+    primary_keys = metadata.get(mdata, (), "table-key-properties") or []
+    LOGGER.info("{} primary keys are {}".format(stream.stream, primary_keys))
+    singer.write_schema(stream.stream,
+                        stream.schema.to_dict(),
+                        primary_keys)
+
+    advertiser_ids = config.get('advertiser_ids', None)
+    if stream.tap_stream_id == "Audiences":
+        if not advertiser_ids:
+            LOGGER.warn("%s stream needs at least one advertiser_id defined in config" % stream.stream)
+        for advertiser_id in advertiser_ids.split(","):
+            token = refresh_auth_token(sdk_client, token)
+            with metrics.http_request_timer(stream.tap_stream_id):
+                result = get_audiences_endpoint(sdk_client, advertiser_id, token=token)
+    else:
+        module = GENERIC_ENDPOINT_MAPPINGS[stream.tap_stream_id]["module"]
+        method = GENERIC_ENDPOINT_MAPPINGS[stream.tap_stream_id]["method"]
+        if stream.tap_stream_id in ("Portfolio", "AdvertiserInfo", "Sellers", "SellerBudgets", "SellerCampaigns"):
+            result = call_generic_endpoint(stream, sdk_client, module, method, token=token)
+        else:
+            result = call_generic_endpoint(stream, sdk_client, module, method, advertiser_ids=advertiser_ids, token=token)
+
+    result = convert_keys_snake_to_camel([_.to_dict() for _ in result])
+
+    with metrics.record_counter(stream.tap_stream_id) as counter:
+        time_extracted = utils.now()
+
+        with Transformer() as bumble_bee:
+            for row in result:
+                row["_sdc_report_datetime"] = REPORT_RUN_DATETIME
+                row = bumble_bee.transform(row, stream.schema.to_dict())
+
+                singer.write_record(stream.stream, row, time_extracted=time_extracted)
+                counter.increment()
+
+    LOGGER.info("Done syncing %s records for the %s report for advertiser_ids %s",
+                counter.value, stream.stream, advertiser_ids)
 
 def sync_stream(config, state, stream, sdk_client):
     # This bifurcation is real. Generic Endpoints have entirely different
     # performance characteristics and constraints than the Report
     # Endpoints and thus should be kept separate.
+    token = refresh_auth_token(sdk_client, None)
     if stream.tap_stream_id in SELLER_STATS_REPORT_TYPES:
-        sync_seller_stats_report(config, state, stream, sdk_client)
+        sync_seller_stats_report(config, state, stream, sdk_client, token)
     elif stream.tap_stream_id in STATISTICS_REPORT_TYPES:
-        sync_statistics_report(config, state, stream, sdk_client)
+        sync_statistics_report(config, state, stream, sdk_client, token)
     elif stream.tap_stream_id in GENERIC_ENDPOINT_MAPPINGS:
-        sync_generic_endpoint(config, state, stream, sdk_client)
+        sync_generic_endpoint(config, state, stream, sdk_client, token)
     else:
         raise Exception("Unrecognized tap_stream_id {}".format(stream.tap_stream_id))
 

@@ -13,16 +13,46 @@ frozenset([
     "StatisticsApi"
 ])
 GENERIC_ENDPOINT_MAPPINGS = {
-    "AdvertiserInfo",
-    "Audiences",
-    "Budgets",
-    "CampaignBids",
-    "Campaigns",
-    "Categories",
-    "Portfolio",
-    "SellerBudgets",
-    "SellerCampaigns",
-    "Sellers",
+    "AdvertiserInfo": {
+        "module": "SellersV2Api",
+        "method": "get_advertisers"
+    },
+    "Audiences": {
+        "module": "AudiencesApi",
+        "method": "get_audiences"
+    },
+    "Budgets": {
+        "module": "BudgetsApi",
+        "method": "get"
+    },
+    "CampaignBids": {
+        "module": "CampaignsApi",
+        "method": "get_bids"
+    },
+    "Campaigns": {
+        "module": "CampaignsApi",
+        "method": "get_campaigns"
+    },
+    "Categories": {
+        "module": "CategoriesApi",
+        "method": "get_categories"
+    },
+    "Portfolio": {
+        "module": "PortfolioApi",
+        "method": "get_portfolio"
+    },
+    "SellerBudgets": {
+        "module": "SellersV2Api",
+        "method": "get_seller_budgets"
+    },
+    "SellerCampaigns": {
+        "module": "SellersV2Api",
+        "method": "get_seller_campaigns"
+    },
+    "Sellers": {
+        "module": "SellersV2Api",
+        "method": "get_sellers"
+    }
 }
 SELLER_STATS_REPORT_TYPES =[
     "CampaignStats",
