@@ -1,0 +1,14 @@
+[run]
+branch = True
+source =
+    tap_criteo
+
+[report]
+fail_under = 100.00
+precision = 2
+
+[paths]
+source =
+    tap_criteo
+    .tox/*/lib/python*/site-packages/tap_criteo
+    .tox/pypy/site-packages/tap_criteo
