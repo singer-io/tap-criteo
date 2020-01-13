@@ -59,7 +59,7 @@ def do_discover():
             # all data but no way to add null to metadata using Singer
             # helper function
             mdata = metadata.to_map(mdata)
-            mdata.get(()).update({"ignoreXDevice": None})
+            mdata.get(()).update({"tap-criteo.ignoreXDevice": None})
             mdata = metadata.to_list(mdata)
         LOGGER.info("Adding stream for %s", report_name)
         streams.append(

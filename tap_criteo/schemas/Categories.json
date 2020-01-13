@@ -1,5 +1,5 @@
 {
-    "type:": ["null", "object"],
+    "type": ["null", "object"],
     "additionalProperties": false,
     "properties": {
         "categoryHashCode": {
@@ -36,7 +36,7 @@
             "type": ["null", "object"],
             "properties": {
                 "bidValue": {
-                    "type": ["null", "float"]
+                    "type": ["null", "number"]
                 },
                 "bidCurrency": {
                     "type": ["null", "string"]

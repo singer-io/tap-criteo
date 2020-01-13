@@ -23,12 +23,7 @@ def main():
         catalog = do_discover()
         print(json.dumps(catalog, indent=2))
     # Otherwise run in sync mode
-    else:
-        if args.catalog:
-            catalog = args.catalog
-        else:
-            catalog = do_discover()
-
+    elif args.catalog:
         do_sync(args.config, args.state, catalog)
 
 

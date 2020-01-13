@@ -1,5 +1,5 @@
 {
-    "type:": ["null", "object"],
+    "type": ["null", "object"],
     "additionalProperties": false,
     "properties": {
         "id": {
@@ -12,7 +12,7 @@
             "type": ["null", "integer"]
         },
         "bid": {
-            "type": ["null", "float"]
+            "type": ["null", "number"]
         },
         "suspended_since": {
             "type": ["null", "boolean"]
