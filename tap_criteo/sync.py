@@ -157,7 +157,7 @@ def parse_csv_string(mdata, csv_string):
     # Read a single line into a String, and parse the headers as a CSV
     headers = csv.reader(io.StringIO(csv_string), delimiter=CSV_DELIMITER)
     # Convert headers to match Schema from metadata
-    header_mapping = {v.get("col-name"): k for k, v in mdata.items()}
+    header_mapping = {v.get("tap-criteo.col-name"): k for k, v in mdata.items()}
     header_array = list(headers)[0]
     header_array = [header_mapping[header][1] for header in header_array]
 
@@ -206,7 +206,7 @@ def sync_statistics_report(config, state, stream, sdk_client, token):
     report_dimensions = [
         field
         for field in field_list
-        if metadata.get(mdata, ("properties", field), "behaviour")
+        if metadata.get(mdata, ("properties", field), "tap-criteo.behaviour")
         == "dimension"
     ]
     LOGGER.info("Selected dimensions: %s", report_dimensions)
@@ -218,7 +218,7 @@ def sync_statistics_report(config, state, stream, sdk_client, token):
     report_metrics = [
         field
         for field in field_list
-        if metadata.get(mdata, ("properties", field), "behaviour") == "metric"
+        if metadata.get(mdata, ("properties", field), "tap-criteo.behaviour") == "metric"
     ]
     LOGGER.info("Selected metrics: %s", report_metrics)
     if not len(report_metrics) >= 1:
@@ -284,9 +284,9 @@ def sync_statistics_for_day(
     if advertiser_ids:
         stats_query["advertiserId"] = advertiser_ids
     # Add ignore_x_device if defined in metadata
-    ignore_x_device = metadata.get(mdata, (), "ignoreXDevice")
+    ignore_x_device = metadata.get(mdata, (), "tap-criteo.ignoreXDevice")
     if ignore_x_device:
-        stats_query["ignoreXDevice"] = ignore_x_device
+        stats_query["tap-criteo.ignoreXDevice"] = ignore_x_device
 
     # Fetch the report as a csv string
     with metrics.http_request_timer(stream.tap_stream_id):

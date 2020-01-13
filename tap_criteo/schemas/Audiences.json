@@ -1,5 +1,5 @@
 {
-    "type:": ["null", "object"],
+    "type": ["null", "object"],
     "additionalProperties": false,
     "properties": {
         "id": {
@@ -7,6 +7,9 @@
         },
         "advertiserId": {
             "type": ["null", "integer"]
+        },
+        "campaignId": {
+            "type": ["null", "string"]
         },
         "name": {
             "type": ["null", "string"]

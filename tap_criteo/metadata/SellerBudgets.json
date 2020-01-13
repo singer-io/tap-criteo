@@ -2,7 +2,6 @@
 {"metadata": {"inclusion": "automatic"}, "breadcrumb": ["properties", "id"]},
 {"metadata": {"inclusion": "automatic"}, "breadcrumb": ["properties", "seller_id"]},
 {"metadata": {"inclusion": "automatic"}, "breadcrumb": ["properties", "campaign_ids"]},
-{"metadata": {"inclusion": "automatic"}, "breadcrumb": ["properties", "campaign_ids"]},
 {"metadata": {"inclusion": "automatic"}, "breadcrumb": ["properties", "budget_type"]},
 {"metadata": {"inclusion": "automatic"}, "breadcrumb": ["properties", "amount"]},
 {"metadata": {"inclusion": "automatic"}, "breadcrumb": ["properties", "start_date"]},
