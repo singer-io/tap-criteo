@@ -243,7 +243,7 @@ def sync_statistics_report(config, state, stream, sdk_client, token):
             state,
             state_key_name(advertiser_ids, stream.stream),
             "last_attribution_window_date",
-            start_date.strftime(utils.DATETIME_FMT),
+            utils.strftime(start_date),
         )
         singer.write_state(state)
     bookmarks.clear_bookmark(
@@ -323,7 +323,7 @@ def sync_statistics_for_day(
                 state,
                 state_key_name(advertiser_ids, stream.stream),
                 "date",
-                start.strftime(utils.DATETIME_FMT),
+                utils.strftime(start),
             )
             singer.write_state(state)
         else:
