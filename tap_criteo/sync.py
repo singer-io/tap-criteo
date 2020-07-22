@@ -277,7 +277,7 @@ def sync_statistics_for_day(
         "metrics": report_metrics,
         "start_date": start.strftime("%Y-%m-%d"),
         "end_date": start.strftime("%Y-%m-%d"),
-        "currency": metadata.get(mdata, (), "currency"),
+        "currency": metadata.get(mdata, (), "tap-criteo.currency"),
     }
     # Filter advertiser_ids if defined in config
     advertiser_ids = config.get("advertiser_ids")
@@ -300,7 +300,7 @@ def sync_statistics_for_day(
             for row in csv_reader:
                 row["_sdc_report_datetime"] = REPORT_RUN_DATETIME
                 row["_sdc_report_currency"] = metadata.get(
-                    mdata, (), "currency"
+                    mdata, (), "tap-criteo.currency"
                 )
                 row = bumble_bee.transform(row, stream.schema.to_dict())
 
