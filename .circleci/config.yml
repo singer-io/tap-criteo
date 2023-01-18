@@ -17,3 +17,10 @@ jobs:
           command: |
             source /usr/local/share/virtualenvs/tap-criteo/bin/activate
             pylint tap_criteo
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          context: circleci-user
