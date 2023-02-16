@@ -243,7 +243,7 @@ def sync_statistics_report(config, state, stream, sdk_client, token):
             state,
             state_key_name(advertiser_ids, stream.stream),
             "last_attribution_window_date",
-            start_date.strftime(utils.DATETIME_FMT),
+            utils.strftime(start_date),
         )
         singer.write_state(state)
     bookmarks.clear_bookmark(
@@ -277,7 +277,7 @@ def sync_statistics_for_day(
         "metrics": report_metrics,
         "start_date": start.strftime("%Y-%m-%d"),
         "end_date": start.strftime("%Y-%m-%d"),
-        "currency": metadata.get(mdata, (), "currency"),
+        "currency": metadata.get(mdata, (), "tap-criteo.currency"),
     }
     # Filter advertiser_ids if defined in config
     advertiser_ids = config.get("advertiser_ids")
@@ -300,7 +300,7 @@ def sync_statistics_for_day(
             for row in csv_reader:
                 row["_sdc_report_datetime"] = REPORT_RUN_DATETIME
                 row["_sdc_report_currency"] = metadata.get(
-                    mdata, (), "currency"
+                    mdata, (), "tap-criteo.currency"
                 )
                 row = bumble_bee.transform(row, stream.schema.to_dict())
 
@@ -323,7 +323,7 @@ def sync_statistics_for_day(
                 state,
                 state_key_name(advertiser_ids, stream.stream),
                 "date",
-                start.strftime(utils.DATETIME_FMT),
+                utils.strftime(start),
             )
             singer.write_state(state)
         else:
